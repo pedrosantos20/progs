@@ -1,0 +1,117 @@
+/* Altere o estilo dos elementos HTML seguindo as instruções abaixo.
+NÃO ALTERE O ARQUIVO HTML! ALTERE APENAS ESTE ARQUIVO CSS!
+
+
+/* Altere a cor do background do elemento <body> para #bdc3c7 */
+body{
+    background-color: #bdc3c7;
+}
+
+
+/* Altere a cor do elemento <h1> para #9b59b6 */
+h1{
+    color: #9b59b6;
+}
+
+
+/* Altere a cor de todos os elementos <h2> para laranja */
+h2{
+    color: orange;
+}
+
+
+/* Altere a cor de todos os elementos <li> para azul (escolha um tom de azul em hexadecimal)*/
+li{
+    color: #0000ff;
+} 
+
+
+/* Altere o background de cada paragrafo para amarelo */
+p{
+    background-color: yellow;
+}
+
+
+/* Aplique uma borda vermelha de 3px em todos os inputs (exceto as checkboxes) */
+input{
+    border: 3px solid;
+    border-color: red;
+}
+
+
+/* Aplique um background branco em todos os elementos com a classe 'hello' */
+.hello{
+    background-color: white;
+}
+
+
+/* Aplique uma borda solida azul de 2px no elemento com o id 'special' (escolha um tom de azul no formato rgb)  */
+#special{
+    border: 2px solid;
+    border-color: rgb(37, 37, 86);
+}
+
+
+
+/* Altere o tamanho da fonte de todos os <p>'s que estão dentro de divs para 25px */
+div p{
+    font-size: 25px;
+}
+
+
+/* Altere para cinza o background de todos os inputs do tipo 'text' (apenas os do tipo 'text') */
+input[type=text]{
+    background-color: gray;
+}
+
+/* Altere para rosa o background dos dois <p>'s que estão dentro do terceiro <div> */
+div:nth-of-type(3) p{
+    background-color: pink;
+}
+
+
+/* Aplique uma borda branca de 5px no segundo <p> dentro do terceiro <div> */
+div:nth-of-type(3) p:nth-of-type(2){
+    border: 5px solid;
+    border-color: white;
+}
+
+/* Altere a fonte do <em> dentro do terceiro <div> para branca com 20px */
+div:nth-of-type(3) em{
+    font-size: 20px;
+    color: white;
+}
+
+
+
+/*DESAFIO*//* Talvez você precise pesquisar novos seletores e propriedades na internet */
+
+
+/* Aplique uma margem esquerda de 50px em todos os checkboxes que estão "checked" (margin-left: 50px)*/
+input[type=checkbox]:checked{
+    margin-left: 50px;
+}
+
+
+/* Altere a fonte de todos os elementos <label> para MAIÚSCULAS (lembre: sem alterar o HTML) */
+label{
+    text-transform: uppercase;
+}
+
+/* Altere a primeira letra do elemento com id 'special' para verde e 100px */
+#special::first-letter {
+    font-size: 100px;
+    color: green;
+  }
+
+
+/* Faça a cor dos elementos <h1> mudar para azul quando o mouse estiver sobre o elemento */
+h1:hover{
+    color: blue;
+}
+
+
+/* Altere a cor para cinza dos elementos <a> que já tiveram seus links visitados */
+a:visited{
+    color: gray;
+}
