@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
+body{
+    width: 700px;
+    border: 20px solid #BDC3C7;
+    margin: 20px auto;
+    padding: 20px;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.artigo{
+    margin-bottom: 20px;
+}
+.data{
+    color: blue;
+    text-transform: uppercase;
+    letter-spacing: 0.18rem;
+}
+h1{
+    color: black;
+    font-size: 2.0rem;
+    font-weight: bold;
+}
+img{
+    float: right;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+.primeirop{
+    border-left: 5px solid #BDC3C7;
+    padding-left: 5px;
+}
+p{
+    text-align: justify;
+}
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}

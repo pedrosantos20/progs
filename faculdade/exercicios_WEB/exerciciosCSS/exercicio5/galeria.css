@@ -1,0 +1,26 @@
+img{
+    width: 200px;
+    padding: 2.5%;
+}
+.flex-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+body{
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+p{
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-size: 3vw;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-left: 2.5%;
+    border-bottom: 2px solid black;
+    margin-right: 2.5%;
+    margin-bottom: 10px;
+    margin-top: 15px;
+}
