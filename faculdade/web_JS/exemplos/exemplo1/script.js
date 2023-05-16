@@ -1,4 +1,5 @@
-let nome = prompt("Digite um nome: ");
 const ola = () => {
-    console.log("Olá " + nome);
+    alert("Olá " + nome);
 }
+let nome = prompt("Digite um nome: ");
+ola(nome);
