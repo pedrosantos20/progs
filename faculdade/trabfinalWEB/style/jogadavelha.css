@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Press Start 2P', cursive;
+    color: #BA01FF;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff;
+}
+
+body {
+    background-image: url(../img/back.jpg);
+    background-size: 100%;
+}
+
+header {
+    background-color: black;
+    height: 5rem;
+    width: 100%;
+    display: flex;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff;
+}
+
+h1 {
+    font-style: italic;
+}
+
+main {
+    background-color: black;
+    
+    height: 40rem;
+    width: 50%;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+footer {
+    background-color: black;
+    height: 5rem;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff;
+}
+
+p {
+    font-size: 2rem;
+    
+}
+
+.playerName {
+    padding: 0.2rem;
+    color: red;
+}
+
+.jogodavelha {
+    display: flex;
+    justify-content: center;
+}
+
+.jogodavelha button {
+    width: 7rem;
+    height: 7rem;
+    cursor: pointer;
+    font-size: 3.125rem;
+    background: black;
+    border: none;
+}
+
+.vertical {
+    border-left: 10px solid white;
+    border-right: 10px solid white;
+
+}
+
+.horizontal {
+    border-top: 10px solid white;
+    border-bottom: 10px solid white;
+}
+
+table {
+    margin: auto;
+    border-collapse: collapse;
+
+}
+
+.placar {
+    width: 100%;
+}
+
+.th {
+    color: red;
+}
+.back{
+    display: flex;
+    justify-content: start;
+    margin: 0.1rem;
+}
