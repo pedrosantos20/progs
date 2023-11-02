@@ -50,23 +50,46 @@ int main()
 				}
 				case 2:
 				{
-					//SALVAR
+					// SALVAR
+
 					InicializarBruxos();
 					Bruxo b;
+
 					printf("\nDigite o codigo do bruxo: ");
 					scanf("%d", &b.cod);
+
 					printf("\nDigite o nome do Bruxo: ");
 					fflush(stdin);
 					scanf("%[^\n]s", &b.nome);
+
 					printf("\nDigite a especialidade do Bruxo: ");
 					fflush(stdin);
 					scanf("%[^\n]s", &b.espec);
+
 					SalvarBruxo(b);
 					break;
 				}
 				case 3:
 				{
 					// ALTERAR
+					Bruxo b;
+					int i=0;
+
+					printf("\nDigite o indice do bruxo: ");
+					scanf("%d", &i);
+
+					printf("\nDigite o codigo do bruxo: ");
+					scanf("%d", &b.cod);
+
+					printf("\nDigite o nome do Bruxo: ");
+					fflush(stdin);
+					scanf("%[^\n]s", &b.nome);
+
+					printf("\nDigite a especialidade do Bruxo: ");
+					fflush(stdin);
+					scanf("%[^\n]s", &b.espec);
+
+					AtualizarBruxo(b);
 					break;
 				}
 				case 4:

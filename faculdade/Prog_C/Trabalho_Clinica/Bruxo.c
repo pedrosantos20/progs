@@ -1,54 +1,64 @@
 #include "Bruxo.h"
 #include <string.h>
 
-Bruxo* bruxos = NULL;
+Bruxo *bruxos = NULL;
 int MAX_BRUXOS = 5;
 int qtdBruxos = 0;
 
-
-int InicializarBruxos(){
-	bruxos = (int *) malloc(MAX_BRUXOS*sizeof(int));
-    if(bruxos == NULL){
-        printf("\nERRO!\n");
+int InicializarBruxos()
+{
+    bruxos = (int *)malloc(MAX_BRUXOS * sizeof(int));
+    if (bruxos == NULL)
+    {
+        perror("\nERRO!\n");
+        exit(1);
     }
 }
 
 int EncerraBruxos()
 {
-	
 }
 
 int SalvarBruxo(Bruxo b)
 {
-    bruxos;
+    if (qtdBruxos == MAX_BRUXOS)
+    {
+        Bruxo* bruxosnt = (Bruxo *)realloc(bruxos, sizeof(Bruxo) * 1);
+        if (bruxosnt == NULL)
+        {
+            perror("\nERRO!\n");
+            exit(1);
+        }else{
+            bruxos = bruxosnt;
+            MAX_BRUXOS += 1;
+        }
+    }
+
+    bruxos[qtdBruxos] = b;
+    qtdBruxos++;
+    
+    
 }
 int QuantidadeBruxos()
 {
-	
 }
 
-Bruxo* ObterBruxoPeloIndice(int indice)
+Bruxo *ObterBruxoPeloIndice(int indice)
 {
-	
 }
 
-Bruxo* ObterBruxoPeloCodigo(int codigo)
+Bruxo *ObterBruxoPeloCodigo(int codigo)
 {
-	
 }
 
 int AtualizarBruxo(Bruxo b)
 {
-	
 }
 
 int ApagarBruxoPeloCodigo(int codigo)
 {
-	
 }
 
-int ApagarBruxoPeloNome(char* nome)
+int ApagarBruxoPeloNome(char *nome)
 {
-	
 }
-
