@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizzaria - Login</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <div class="conteudo-cabecalho">
+      <h1>Pizzaria Delícia</h1>
+      <p>As melhores pizzas da cidade!</p>
+    </div>
+  </header>
+
+  <section class="conteudo">
+    <h2>Login</h2>
+    <!-- Adicione o conteúdo do formulário de login aqui -->
+
+    <form action="/login" method="post">
+      <!-- Campos do formulário -->
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="senha">Senha:</label>
+      <input type="password" id="senha" name="senha" required>
+
+      <button type="submit" class="botao-submit">Entrar</button>
+    </form>
+
+    <p>Ainda não possui uma conta? <a href="/cadastro">Cadastre-se aqui</a>.</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2023 Pizzaria Delícia. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>

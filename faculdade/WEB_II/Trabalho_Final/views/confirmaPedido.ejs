@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmação de Pedido</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <div class="perfil">
+      <p>Perfil</p>
+    </div>
+    <div class="conteudo-cabecalho">
+      <h1>Pizzaria Delícia</h1>
+      <p>Confirmação de Pedido</p>
+    </div>
+  </header>
+
+  <section class="pedido-confirmado">
+    <h2>Itens do Pedido</h2>
+    <ul>
+      <% for (let item in itensPedido) { %>
+        <% if (itensPedido[item] > 0) { %>
+          <li><%= item %> - x<%= itensPedido[item] %></li>
+        <% } %>
+      <% } %>
+    </ul>
+  </section>
+    <section class="botoes">
+        <form action="/pedidoCancelado" method="get"> <!-- Adiciona um formulário para o botão de cancelar -->
+          <button class="botao cancelar" type="submit">Cancelar</button>
+        </form>
+        <form action="/pedidoConfirmado" method="post"> <!-- Adiciona um formulário para o botão de confirmar -->
+          <button class="botao confirmar" type="submit">Confirmar Pedido</button>
+        </form>
+      </section>
+
+  <footer class="footer_pagina_menor">
+    <p>&copy; 2023 Pizzaria Delícia. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>

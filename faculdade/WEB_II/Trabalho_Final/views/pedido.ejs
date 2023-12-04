@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizzaria</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/script/qtdpedido.js"></script>
+</head>
+<body>
+  <header>
+    <div class="perfil">
+      <p>Perfil</p>
+    </div>
+    <div class="conteudo-cabecalho">
+      <h1>Pizzaria Delícia</h1>
+      <p>As melhores pizzas da cidade!</p>
+    </div>
+  </header>
+
+  <section class="menu">
+    <h2>Cardápio</h2>
+    <form id="form-pedido" action="/confirmaPedido" method="get">
+    <div class="secao-menu">
+      <h3>Pizzas</h3>
+      <ul>
+        <h4>Pizzas Salgadas</h4>
+        <li>
+          <span class="nome-pizza">Pizza de Calabresa</span>
+          <span class="preco-pizza">R$ 20,00</span>
+          <div class="quantidade-container">
+            <button type="button" class="quantidade-btn diminuir">-</button>
+            <input id="pcalabresa" name="pcalabresa" type="text" class="quantidade-input" value="0" readonly>
+            <button type="button" class="quantidade-btn aumentar">+</button>
+          </div>
+        </li>
+        <li>
+            <span class="nome-pizza">Pizza de Frango com Catupiry</span>
+            <span class="preco-pizza">R$ 20,00</span>
+            <div class="quantidade-container">
+                <button type="button" class="quantidade-btn diminuir">-</button>
+                <input id="pfrango" name="pfrango" type="text" class="quantidade-input" value="0" readonly>
+                <button type="button" class="quantidade-btn aumentar">+</button>
+              </div>
+          </li>
+          <li>
+            <span class="nome-pizza">Pizza de Quatro Queijos</span>
+            <span class="preco-pizza">R$ 19,00</span>
+            <div class="quantidade-container">
+                <button type="button" class="quantidade-btn diminuir">-</button>
+                <input id="pqueijos" name="pqueijos" type="text" class="quantidade-input" value="0" readonly>
+                <button type="button" class="quantidade-btn aumentar">+</button>
+              </div>
+          </li>
+          <li>
+            <span class="nome-pizza">Pizza de Stogonoff de Carne</span>
+            <span class="preco-pizza">R$ 25,00</span>
+            <div class="quantidade-container">
+                <button type="button" class="quantidade-btn diminuir">-</button>
+                <input id="pstrcarne" name="pstrcarne" type="text" class="quantidade-input" value="0" readonly>
+                <button type="button" class="quantidade-btn aumentar">+</button>
+              </div>
+          </li>
+          <li>
+            <span class="nome-pizza">Pizza de Stogonoff de Frango</span>
+            <span class="preco-pizza">R$ 23,00</span>
+            <div class="quantidade-container">
+                <button type="button" class="quantidade-btn diminuir">-</button>
+                <input id="pstrcfrango" name="pstrcfrango" type="text" class="quantidade-input" value="0" readonly>
+                <button type="button" class="quantidade-btn aumentar">+</button>
+              </div>
+          </li>
+          <li>
+            <span class="nome-pizza">Pizza de Camarão</span>
+            <span class="preco-pizza">R$ 30,00</span>
+            <div class="quantidade-container">
+                <button type="button" class="quantidade-btn diminuir">-</button>
+                <input id="pcamarao" name="pcamarao" type="text" class="quantidade-input" value="0" readonly>
+                <button type="button" class="quantidade-btn aumentar">+</button>
+              </div>
+          </li>
+          <h4>Pizzas Doces</h4>
+          <li>
+            <span class="nome-pizza">Pizza de Chocolate Preto</span>
+            <span class="preco-pizza">R$ 22,00</span>
+            <div class="quantidade-container">
+                <button type="button" class="quantidade-btn diminuir">-</button>
+                <input id="pchocopreto" name="pchocopreto" type="text" class="quantidade-input" value="0" readonly>
+                <button type="button" class="quantidade-btn aumentar">+</button>
+              </div>
+          </li>
+          <li>
+            <span class="nome-pizza">Pizza de Chocolate Branco</span>
+            <span class="preco-pizza">R$ 22,00</span>
+            <div class="quantidade-container">
+                <button type="button" class="quantidade-btn diminuir">-</button>
+                <input id="pchocobranco" name="pchocobranco" type="text" class="quantidade-input" value="0" readonly>
+                <button type="button" class="quantidade-btn aumentar">+</button>
+              </div>
+          </li>
+          <li>
+            <span class="nome-pizza">Pizza de Chocolate Preto com Morango</span>
+            <span class="preco-pizza">R$ 24,00</span>
+            <div class="quantidade-container">
+                <button type="button" class="quantidade-btn diminuir">-</button>
+                <input id="pchocopretocmorango" name="pchocopretocmorango" type="text" class="quantidade-input" value="0" readonly>
+                <button type="button" class="quantidade-btn aumentar">+</button>
+              </div>
+          </li>
+        </ul>
+      </div>
+      <br><br><br>
+      <div class="secao-menu">
+        <h3>Bebidas</h3>
+        <ul>
+          <li>
+            <span class="nome-bebida">Coca-Cola</span>
+            <span class="preco-bebida">R$ 7,50</span>
+            <div class="quantidade-container">
+                <button type="button" class="quantidade-btn diminuir">-</button>
+                <input id="cocacola" name="cocacola" type="text" class="quantidade-input" value="0" readonly>
+                <button type="button" class="quantidade-btn aumentar">+</button>
+              </div>
+          </li>
+          <li>
+            <span class="nome-bebida">Guaraná</span>
+            <span class="preco-bebida">R$ 8,50</span>
+            <div class="quantidade-container">
+                <button type="button" class="quantidade-btn diminuir">-</button>
+                <input id="guarana" name="guarana" type="text" class="quantidade-input" value="0" readonly>
+                <button type="button" class="quantidade-btn aumentar">+</button>
+              </div>
+          </li>
+          <li>
+            <span class="nome-bebida">Sprite</span>
+            <span class="preco-bebida">R$ 7,50</span>
+            <div class="quantidade-container">
+                <button type="button" class="quantidade-btn diminuir">-</button>
+                <input id="sprite" name="sprite" type="text" class="quantidade-input" value="0" readonly>
+                <button type="button" class="quantidade-btn aumentar">+</button>
+              </div>
+          </li>
+          <li>
+            <span class="nome-bebida">Água</span>
+            <span class="preco-bebida">R$ 5,00</span>
+            <div class="quantidade-container">
+                <button type="button" class="quantidade-btn diminuir">-</button>
+                <input id="agua" name="agua" type="text" class="quantidade-input" value="0" readonly>
+                <button type="button" class="quantidade-btn aumentar">+</button>
+              </div>
+          </li>
+          <h4>Cervejas</h4>
+          <li>
+            <span class="nome-bebida">Polar</span>
+            <span class="preco-bebida">R$ 10,00</span>
+            <div class="quantidade-container">
+                <button type="button" class="quantidade-btn diminuir">-</button>
+                <input id="polar" name="polar" type="text" class="quantidade-input" value="0" readonly>
+                <button type="button" class="quantidade-btn aumentar">+</button>
+              </div>
+          </li>
+          <li>
+            <span class="nome-bebida">Heineken</span>
+            <span class="preco-bebida">R$ 12,00</span>
+            <div class="quantidade-container">
+                <button type="button" class="quantidade-btn diminuir">-</button>
+                <input id="heineken" name="heineken" type="text" class="quantidade-input" value="0" readonly>
+                <button type="button" class="quantidade-btn aumentar">+</button>
+              </div>
+          </li>
+          <li>
+            <span class="nome-bebida">Budweiser</span>
+            <span class="preco-bebida">R$ 12,00</span>
+            <div class="quantidade-container">
+                <button type="button" class="quantidade-btn diminuir">-</button>
+                <input id="budweiser" name="budweiser" type="text" class="quantidade-input" value="0" readonly>
+                <button type="button" class="quantidade-btn aumentar">+</button>
+              </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="pedido">
+        <button type="submit" class="botao-pedido">Fazer Pedido</button>
+    </section>
+</form>
+
+  
+    <footer>
+      <p>&copy; 2023 Pizzaria Delícia. Todos os direitos reservados.</p>
+    </footer>
+  </body>
+  </html>
