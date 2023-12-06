@@ -11,3 +11,33 @@ async function connect(){
     }
 }
 connect();
+
+async function insertCliente(cliente){
+    const conn = await connect();
+    const sql = 'INSERT INTO cliente(CPF,Nome,Endereco,senha,email) VALUES (?,?,?,?,?);';
+    const values = [cliente.cpf, cliente.nome, cliente.endereco, cliente.senha, cliente.email];
+    return await conn.query(sql, values);
+}
+
+async function insertPedido(CPF, Valor, Pagamento) {
+    const conn = await connect();
+    const sql = 'INSERT INTO pedido(CPF, Valor, Pagamento) VALUES (?, ?, ?)';
+    const values = [CPF, Valor, Pagamento];
+    return await conn.query(sql, values);
+}
+
+async function insertBebidaPedido(Cod_Pedido, Bcod, qtd) {
+    const conn = await connect();
+    const sql = 'INSERT INTO bebida_pedido(Cod_Pedido, Bcod, qtd) VALUES (?, ?, ?)';
+    const values = [Cod_Pedido, Bcod, qtd];
+    return await conn.query(sql, values);
+}
+
+async function insertPizzaPedido(Cod_Pedido, Pcod, qtd) {
+    const conn = await connect();
+    const sql = 'INSERT INTO pizza_pedido(Cod_Pedido, Pcod, qtd) VALUES (?, ?, ?)';
+    const values = [Cod_Pedido, Pcod, qtd];
+    return await conn.query(sql, values);
+}
+
+module.exports = { connect, insertCliente, insertPedido, insertBebidaPedido, insertPizzaPedido };

@@ -8,8 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function calcularForcaSenha(senha) {
-      // Lógica para calcular a força da senha (pode ser personalizada conforme necessário)
-      // Este é apenas um exemplo simples
       const comprimentoMinimo = 8;
       const numeros = /\d/.test(senha);
       const letrasMinusculas = /[a-z]/.test(senha);
@@ -22,7 +20,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function exibirForcaSenha(forca) {
-      // Exibe a força da senha para o usuário
       if (forca < 8) {
         forcaSenhaTexto.innerText = "Fraca";
         forcaSenhaTexto.style.color = "red";

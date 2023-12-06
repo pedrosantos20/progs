@@ -18,26 +18,42 @@
   </header>
 
   <section class="pedido-confirmado">
-    <h2>Itens do Pedido</h2>
+    <h2>Pizzas</h2>
     <ul>
-      <% for (let item in itensPedido) { %>
-        <% if (itensPedido[item] > 0) { %>
-          <li><%= item %> - x<%= itensPedido[item] %></li>
+      <% for (let pizza of pizzas) { %>
+        <% if (pizza.quantidade > 0) { %>
+          <li><%= pizza.titulo %> | x<%= pizza.quantidade %></li>
         <% } %>
       <% } %>
     </ul>
+
+    <h2>Bebidas</h2>
+    <ul>
+      <% for (let bebida of bebidas) { %>
+        <% if (bebida.quantidade > 0) { %>
+          <li><%= bebida.titulo %> | x<%= bebida.quantidade %></li>
+        <% } %>
+      <% } %>
+    </ul>
+
+    <h3 id="valortotaldopedido">R$<%= totalCompra.toFixed(2) %></h3>
   </section>
-    <section class="botoes">
-        <form action="/pedidoCancelado" method="get"> <!-- Adiciona um formulário para o botão de cancelar -->
-          <button class="botao cancelar" type="submit">Cancelar</button>
-        </form>
-        <form action="/pedidoConfirmado" method="post"> <!-- Adiciona um formulário para o botão de confirmar -->
-          <button class="botao confirmar" type="submit">Confirmar Pedido</button>
-        </form>
-      </section>
+
+  <section class="botoes">
+    <form action="/pedidoCancelado" method="get">
+      <button class="botao cancelar" type="submit">Cancelar</button>
+    </form>
+    <form action="/pedidoConfirmado" method="post">
+      <input type="hidden" name="pizzas" value="<%= JSON.stringify(pizzas) %>">
+      <input type="hidden" name="bebidas" value="<%= JSON.stringify(bebidas) %>">
+      <input type="hidden" name="totalCompra" value="<%= totalCompra %>">
+      <button class="botao confirmar" type="submit">Confirmar Pedido</button>
+    </form>
+  </section>
 
   <footer class="footer_pagina_menor">
     <p>&copy; 2023 Pizzaria Delícia. Todos os direitos reservados.</p>
   </footer>
 </body>
+
 </html>
