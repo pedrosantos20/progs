@@ -32,6 +32,7 @@ app
       if (req.session.user) {
         try {
           // Recupera dados do usuário a partir da sessão
+          console.log(req.session.user.CPF)
           const [user] = await db.execute('SELECT * FROM cliente WHERE CPF = ?', [req.session.user.CPF]);
           req.session.user = { cpf: user.CPF, nome: user.Nome, email: user.email, endereco: user.Endereco }
         } catch (error) {
@@ -80,7 +81,6 @@ app
       if (!req.session.user) {
         return res.redirect('/login');
       }
-      // Renderizar a página de perfil com os dados do usuário
       res.render('pedido', { user: req.session.user });
     })
     .get('/success', (req, res) => {
@@ -88,7 +88,8 @@ app
         return res.redirect('/login');
       }
       // Renderizar a página de perfil com os dados do usuário
-      res.render('perfil', { user: req.session.user });
+      
+      res.render('perfil', { user: req.session.user});
   })
     .get('/logout', (req, res) => {
       req.logout();
@@ -132,10 +133,10 @@ app
 
       res.render('confirmaPedido', { pizzasFilter, bebidasFilter, totalCompra, user: req.session.user  });
   })
+      .get('/cadastro_sucesso', (req, res) => {
+        res.render('cadastroSucesso', { user: req.session.user });
+    })
     //Posts
-    .get('/cadastro_sucesso', (req, res) => {
-      res.render('cadastroSucesso');
-  })
     .post('/cadastrar', async (req, res) => {
       const { nome, cpf, endereco, email, senha, confirmarSenha } = req.body;
     
@@ -187,7 +188,7 @@ app
         req.session.user = { cpf: user.CPF, nome: user.Nome, email: user.email, endereco: user.Endereco }; 
         console.log('Login bem-sucedido');
         // Redirecionar para a página de sucesso ou fazer qualquer outra ação necessária
-        res.redirect('/success');
+        res.redirect('/success?cpf='+cpf);
       } catch (error) {
         console.error('Erro durante a autenticação:', error);
         res.status(500).send('Erro durante a autenticação.');
@@ -221,7 +222,7 @@ app
         for (const pizza of pizzas) {
           await db.insertPizzaPedido(Cod_Pedido, pizza.id, pizza.quantidade);
         }
-        res.render('pedidoConfirmado', { totalCompra });
+        res.render('pedidoConfirmado', { totalCompra, user: req.session.user });
       } catch (error) {
         console.error('Erro ao salvar pedido:', error);
         res.status(500).send('Erro ao processar o pedido.');
