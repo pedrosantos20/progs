@@ -4,11 +4,13 @@ const request = require('request');
 const path = require('path');
 const db = require("./db");
 const session = require('express-session');
-const passport = require('passport');
-const LocalStrategy = require ('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
-
+const sessionMiddleware = session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: false
+});
 
 const app = express();
 
@@ -21,25 +23,76 @@ app
 app
     .use(express.urlencoded({ extended: true }))
     .use(express.static(path.join(__dirname, 'public')))
-    .use(session({ secret: 'your-secret-key', resave: false, saveUninitialized: false }))
-    .use(passport.initialize())
-    .use(passport.session());
+    .use(sessionMiddleware)
+    .use(require('express-flash')())
 
+  
+    app.use(async (req, res, next) => {
+      // Verifica se há uma sessão existente
+      if (req.session.user) {
+        try {
+          // Recupera dados do usuário a partir da sessão
+          const [user] = await db.execute('SELECT * FROM cliente WHERE CPF = ?', [req.session.user.CPF]);
+          req.session.user = { cpf: user.CPF, nome: user.Nome, email: user.email, endereco: user.Endereco }
+        } catch (error) {
+          console.error('Erro ao obter dados do usuário:', error);
+        }
+      }
+      next();
+    })
+  
 
 // ROTAS
 app
     //Gets
     .get('/', (req, res) => {
-        res.render('index');
+      if (req.session.user) {
+          // Recupera dados do usuário a partir da sessão
+          const [user] = db.execute('SELECT * FROM cliente WHERE CPF = ?', [req.session.user.CPF]);
+          req.session.user = { cpf: user.CPF, nome: user.Nome, email: user.email, endereco: user.Endereco }
+          res.render('index', { user: req.session.user });
+      }else{
+        res.render('index', { user: req.session.user });
+      }  
+    })
+    .get('/index', (req, res) => {
+      if (req.session.user) {
+          // Recupera dados do usuário a partir da sessão
+          const [user] = db.execute('SELECT * FROM cliente WHERE CPF = ?', [req.session.user.CPF]);
+          req.session.user = { cpf: user.CPF, nome: user.Nome, email: user.email, endereco: user.Endereco }
+          res.render('index', { user: req.session.user });
+      }else{
+        res.render('index', { user: req.session.user });
+      } 
     })
     .get('/login', (req, res) => {
+      if (req.session.user) {
+        res.render('success');
+      }
         res.render('login');
     })
     .get('/cadastro', (req, res) => {
         res.render('cadastro');
     })
+    
+
     .get('/pedido', (req, res) => {
-        res.render('pedido');
+      if (!req.session.user) {
+        return res.redirect('/login');
+      }
+      // Renderizar a página de perfil com os dados do usuário
+      res.render('pedido', { user: req.session.user });
+    })
+    .get('/success', (req, res) => {
+      if (!req.session.user) {
+        return res.redirect('/login');
+      }
+      // Renderizar a página de perfil com os dados do usuário
+      res.render('perfil', { user: req.session.user });
+  })
+    .get('/logout', (req, res) => {
+      req.logout();
+      res.redirect('/'); 
     })
     .get('/confirmaPedido', (req, res) => {
       const pizzas = [
@@ -63,12 +116,26 @@ app
           { id: 4, titulo: 'Heineken', quantidade: req.query.heineken || 0, preco: 12 },
           { id: 5, titulo: 'Budweiser', quantidade: req.query.budweiser || 0, preco: 12 },
       ];
+      function calcularTotalCompra(pizzas, bebidas) {
+        const totalPizzas = pizzas.reduce((total, pizza) => total + pizza.quantidade * pizza.preco, 0);
+        const totalBebidas = bebidas.reduce((total, bebida) => total + bebida.quantidade * bebida.preco, 0);
+      
+        return totalPizzas + totalBebidas;
+      }
   
       const totalCompra = calcularTotalCompra(pizzas, bebidas);
+      if (!req.session.user) {
+        return res.redirect('/login');
+      }
+      const pizzasFilter = pizzas.filter(pizza => pizza.quantidade > 0)
+      const bebidasFilter = bebidas.filter(bebida => bebida.quantidade > 0)
 
-      res.render('confirmaPedido', { pizzas, bebidas, totalCompra });
+      res.render('confirmaPedido', { pizzasFilter, bebidasFilter, totalCompra, user: req.session.user  });
   })
     //Posts
+    .get('/cadastro_sucesso', (req, res) => {
+      res.render('cadastroSucesso');
+  })
     .post('/cadastrar', async (req, res) => {
       const { nome, cpf, endereco, email, senha, confirmarSenha } = req.body;
     
@@ -89,29 +156,60 @@ app
         res.redirect('/cadastro_sucesso');
       } catch (error) {
         console.error(error);
-        res.redirect('/cadastro_erro');
+        res.redirect('/login');
+      }
+    })
+    
+    .post('/logar', async (req, res) => {
+      try {
+        const { cpf, senha } = req.body;
+    
+        // Busca o usuário no banco de dados usando o CPF
+        const [user] = await db.execute('SELECT * FROM cliente WHERE CPF = ?', [cpf]);
+        
+        if (!user || user.length === 0) {
+          // Usuário não encontrado
+          console.log('Usuário não encontrado');
+          return res.redirect('/login');
+        }
+    
+        // Verifica a senha usando o bcrypt
+        
+        const passwordMatch = await bcrypt.compare(senha, user.senha);
+    
+        if (!passwordMatch) {
+          // Senha incorreta
+          console.log('Senha incorreta');
+          return res.redirect('/login');
+        }
+    
+        // Autenticação bem-sucedida
+        req.session.user = { cpf: user.CPF, nome: user.Nome, email: user.email, endereco: user.Endereco }; 
+        console.log('Login bem-sucedido');
+        // Redirecionar para a página de sucesso ou fazer qualquer outra ação necessária
+        res.redirect('/success');
+      } catch (error) {
+        console.error('Erro durante a autenticação:', error);
+        res.status(500).send('Erro durante a autenticação.');
       }
     })
 
-    .post('/login', passport.authenticate('local', {
-          successRedirect: '/success',
-          failureRedirect: '/login',
-          failureFlash: true,
-        })
-    )
+      
 
     .post('/pedidoConfirmado', async (req, res) => {
       const pizzas = JSON.parse(req.body.pizzas);
       const bebidas = JSON.parse(req.body.bebidas);
       const totalCompra = parseFloat(req.body.totalCompra);
-    
+      const user = String(req.body.cpf);
+
+      console.log(user);
   
       try {
         // Salvar dados no banco de dados usando o módulo db.js
         await db.connect();
     
         // Salvar dados na tabela 'pedido'
-        const [pedidoResult] = await db.insertPedido(req.user.CPF, totalCompra, 'PIX');
+        const [pedidoResult] = await db.insertPedido(user, totalCompra, 'PIX');
         const Cod_Pedido = pedidoResult.insertId;
     
         // Salvar dados na tabela 'bebida_pedido'
@@ -123,8 +221,6 @@ app
         for (const pizza of pizzas) {
           await db.insertPizzaPedido(Cod_Pedido, pizza.id, pizza.quantidade);
         }
-    
-        // Adicione aqui a lógica para renderizar a página 'pedidoConfirmado.ejs'
         res.render('pedidoConfirmado', { totalCompra });
       } catch (error) {
         console.error('Erro ao salvar pedido:', error);
@@ -137,44 +233,4 @@ app
 
     .listen(3000, () => {
         console.log("Servidor ligado na porta 3000");
-    })
-
-
-    
-    // AUTENTICAÇÃO
-    passport.use(new LocalStrategy(
-      async (cpf, password, done) => {
-        const connection = await db.connect();
-    
-        try {
-          const [user] = await connection.execute('SELECT * FROM users WHERE CPF = ?', [cpf]);
-    
-          if (!user || user.length === 0) {
-            return done(null, false, { message: 'Usuário não encontrado.' });
-          }
-    
-          const passwordMatch = await bcrypt.compare(password, user[0].senha);
-    
-          if (!passwordMatch) {
-            return done(null, false, { message: 'Senha incorreta.' });
-          }
-    
-          return done(null, user[0]);
-        } catch (error) {
-          return done(error);
-        }
-      }
-    ));
-    
-    // Serialização e desserialização do usuário para armazenar no cookie da sessão
-    passport.serializeUser((user, done) => done(null, user.cpf));
-    passport.deserializeUser(async (cpf, done) => {
-      const connection = await db.connect();
-    
-      try {
-        const [user] = await connection.execute('SELECT * FROM users WHERE CPF = ?', [cpf]);
-        done(null, user[0]);
-      } catch (error) {
-        done(error);
-      }
     })

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seu Perfil</title>
+  <link rel="stylesheet" href="/css/style.css"> 
+</head>
+<body>
+  <header>
+    <div class="perfil">
+        <% if (user) { %>
+            <a><%= user.nome %></a>
+          <% } else { %>
+            <a href="/login">Login</a>
+          <% } %>
+    </div>
+  </header>
+
+  <section class="conteudo-perfil">
+    <h2>Perfil do Usuário</h2>
+
+    <h3>CPF:</h3>
+        <p><%= user.cpf %></p>
+    <br>
+    <h3>Nome: </h3>
+        <p><%= user.nome %></p>
+    <br>
+    <h3>Email: </h3>
+        <p><%= user.email %></p>
+    <br>
+    <h3>Endereço: </h3>
+        <p><%= user.endereco %></p>
+    <br>
+    
+    
+
+    <p><a href="/logout">Logout</a></p>
+    <p><a href="/pedido">pedido</a></p>
+  </section>
+  
+</head>
+<body>
+  <footer class="footer_pagina_menor">
+    <p>&copy; 2023 Pizzaria Delícia. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>

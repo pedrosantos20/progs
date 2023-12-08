@@ -40,4 +40,17 @@ async function insertPizzaPedido(Cod_Pedido, Pcod, qtd) {
     return await conn.query(sql, values);
 }
 
-module.exports = { connect, insertCliente, insertPedido, insertBebidaPedido, insertPizzaPedido };
+async function execute(query, values = []) {
+    const connection = await connect();
+  
+    try {
+      const [rows, fields] = await connection.execute(query, values);
+      return rows;
+    } catch (error) {
+      throw error;
+    } finally {
+      await connection.end();
+    }
+  }
+
+module.exports = { connect, insertCliente, insertPedido, insertBebidaPedido, insertPizzaPedido, execute };

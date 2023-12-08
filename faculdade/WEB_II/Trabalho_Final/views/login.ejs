@@ -16,18 +16,23 @@
 
   <section class="conteudo">
     <h2>Login</h2>
-    <form action="/login" method="post">
+    <!-- Adiciona a tag de flash para exibir mensagens de erro, se houver -->
+    <% if (typeof messages !== 'undefined' && messages.error) { %>
+      <p class="mensagem-erro"><%= messages.error %></p>
+    <% } %>
+    <form action="/logar" method="post" enctype="application/x-www-form-urlencoded">
       <label for="cpf">CPF:</label>
       <input type="text" id="cpf" name="cpf" required>
-
+    
       <label for="senha">Senha:</label>
       <input type="password" id="senha" name="senha" required>
-
+    
       <button type="submit" class="botao-submit">Entrar</button>
     </form>
 
     <p>Ainda não possui uma conta? <a href="/cadastro">Cadastre-se aqui</a>.</p>
   </section>
+
 
   <footer>
     <p>&copy; 2023 Pizzaria Delícia. Todos os direitos reservados.</p>

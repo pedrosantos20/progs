@@ -197,6 +197,16 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
+
+  .pedido-confirmado-sucesso{
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: rgb(63, 156, 63);
+    padding: 20px;
+    border: 2px solid #000;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
   
   .pedido-confirmado h2 {
     font-size: 20px;
@@ -251,4 +261,55 @@ body {
     background-color: #4caf50;
     color: #fff;
     border: none;
+  }
+
+
+
+  .perfil {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  
+  .footer_pagina_menor {
+    background-color: #333;
+    padding: 10px;
+    text-align: center;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+  }
+  
+  .conteudo-perfil a {
+    text-decoration: none;
+    color: #ff9800;
+  }
+
+  section.conteudo-perfil {
+    text-align: center;
+  }
+
+  .conteudo-perfil h2 {
+    color: #ff9800;
+  }
+
+  .conteudo-perfil p {
+    margin: 8px 0;
+  }
+
+  .conteudo-perfil a {
+    color: #ff9800;
+    text-decoration: none;
+  }
+
+  .conteudo-perfil a:hover {
+    text-decoration: underline;
+  }
+
+  .perfil a {
+    text-decoration: none;
+    color: white;
   }
